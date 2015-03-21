@@ -1,0 +1,50 @@
+name:                ffmpeg-effects
+version:             0.1.0.0
+-- synopsis:            
+-- description:         
+license:             Apache-2.0
+license-file:        LICENSE
+author:              Matthias Treydte
+maintainer:          mt@waldheinz.de
+-- copyright:           
+category:            Codec
+build-type:          Simple
+-- extra-source-files:  
+cabal-version:       >=1.10
+
+flag demos
+  description: build demo executables
+  default:     False
+  manual:      True
+
+library
+  exposed-modules:
+    Codec.FFMpeg
+    Codec.FFMpeg.Format
+
+  other-modules:
+    Codec.FFMpeg.Internal.Format
+
+  -- other-extensions:    
+  build-tools:         hsc2hs
+  pkgconfig-depends:   libavutil, libavformat, libavcodec, libswscale
+  ghc-options:         -Wall
+  build-depends:       base >=4.7 && <4.8,
+                       extensible-effects >= 1.9 && < 2.0,
+                       transformers >= 0.4 && < 1.0
+
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+
+executable probe
+  if !flag(demos)
+    buildable:      False
+
+  build-depends:    base < 5
+  build-depends:    ffmpeg-effects,
+                    extensible-effects
+
+  hs-source-dirs:   demos
+  main-is:          Probe.hs
+  default-language: Haskell2010
+  ghc-options:      -Wall
