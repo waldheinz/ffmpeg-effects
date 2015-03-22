@@ -5,7 +5,7 @@
     #-}
 
 module Codec.FFMpeg.Internal.Format (
-    AVFormatContext, c_avformat_open_input, c_avformat_close_input
+    AVFormatContext(..), c_avformat_open_input, c_avformat_close_input
     ) where
 
 import Data.Typeable ( Typeable )
@@ -20,6 +20,5 @@ newtype AVFormatContext = AVFormatContext (Ptr ())
 foreign import ccall "avformat_open_input"
   c_avformat_open_input :: Ptr AVFormatContext -> CString -> Ptr ()
                       -> Ptr (Ptr ()) -> IO CInt
-
 foreign import ccall "avformat_close_input"
   c_avformat_close_input :: Ptr AVFormatContext -> IO ()

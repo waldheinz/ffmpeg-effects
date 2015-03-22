@@ -1,9 +1,11 @@
 
 module Codec.FFMpeg (
-    initFFMpeg
+    initFFMpeg,
+
+    AVMediaType, video
     ) where
 
-import Control.Eff
+import Codec.FFMpeg.Internal.Util
 
 initFFMpeg :: IO ()
 initFFMpeg = c_av_register_all
